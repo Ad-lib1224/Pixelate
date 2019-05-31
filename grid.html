@@ -16,10 +16,15 @@
 	</style>
 </head>
 <body>
+	<div align="center">
+		<label for = "rows"> Rows:</label>
+		<input type = "number" id = "rows" name>	
+	</div>
+	
 	<div align ="center">
-		<table>
+		<table id = "pixelTable">
 			<tr>
-				<td></td>
+				<td onclick = "changeColor()" id = "clickColor"></td>
 				<td></td>
 			</tr>
 			<tr>
@@ -28,5 +33,13 @@
 			</tr>
 		</table>
 	</div>
+	<script>
+		//When a cell is clicked the color switches from grey to red
+		//click on a single cell, changing its color to the currently selected color
+		function changeColor(){
+			document.getElementById('clickColor')
+			clickColor.style.backgroundColor="#ff0000"
+		}
+	</script>
 </body>
 </html>
