@@ -7,26 +7,86 @@
 		}
 		table, tr,td {
 			border: 2px solid black;
-			background-color: #b3b3b3;;
+			background-color: #b3b3b3;
 		}
-		td {
+		td,tr {
 			width: 200px;
 			height: 200px;
+			background-color: yellow;
 		}
 	</style>
 </head>
 <body>
+	<div align="center">
+		<!-- <label for = "rows"> Rows:</label> -->
+		<button onclick="addRows()"> Add Row </button>
+		<!-- <input type = "button" onclick = "addRows()" id = "rows"> -->	
+	</div>
+	
 	<div align ="center">
-		<table>
-			<tr>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td> 
-			</tr>
+		<table id = "pixelTable">
+			<tbody id ="tableBody">
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td> 
+				</tr>
+			</tbody>
+			
 		</table>
 	</div>
+	<script>
+		//addRows
+		function addRows(){
+			//add rows using "Add Rows Button"
+
+			//retrieve Table Id
+			let table = document.getElementById("tableBody");
+			//create a new element for the row
+			let rows = document.createElement("tr");
+			//create new td
+			let col = document.createElement("td");
+			rows.appendChild(col);
+			//add new row to the table
+			table.appendChild(rows);
+
+		}
+		//add columns
+			//make a loop: for every col added, add the same number of rows variable that keeps track of column, increment columun count 
+			//when you make a row, you go up to the colcount 
+
+
+		function addColumns(){
+			let colAdded = 0;
+
+			let table = document.getElementById("tableBody");
+
+			let columns = document.createElement("td")
+			for (columns in table){
+				if()
+				table.appendChild(rows);
+			}
+
+			colAdded++;
+		}
+			// //add rows from input 
+			// //create new row
+			// let rows = document.createElement("tr")
+
+			// //retrieve input from form type
+			// let table = document.getElementById("pixelTable").value;
+
+			// //append input to table
+			// if(table >)
+			// for(let i=0; i<table;i++) {
+			// 	table.appendChild(rows);
+			// }
+			// getId.addEventListener(“click”, function(event){
+			// 	getId.insertRow()=addRows};
+		//document.getElementById(“myId”).addEventListener(“click”, function(event){
+	</script>
 </body>
 </html>
