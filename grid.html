@@ -14,12 +14,33 @@
 			height: 200px;
 			background-color: yellow;
 		}
+/*		//Paint Feature Styling*/
+		table {
+			border-collapse: collapse;
+			border:1px solid black;
+		}
+		/*td {
+			height:100px;
+			width:100px;
+			border:1px solid black;
+			text-align: center;
+			background-color: "white";
+		}*/
 	</style>
 </head>
 <body>
 	<div align="center">
-		<!-- <label for = "rows"> Rows:</label> -->
+
 		<button onclick="addRows()"> Add Row </button>
+		<button onclick="addColumns()">Add Column</button>
+
+		<button onclick="fillPaint()">Fill All</button>
+		<button onclick="fillUncolored()">Fill Uncolored</button>
+		<button onclick="fillWhite()">Clear</button>
+		<button onclick="clickAndHover()">Click and Hold</button>
+
+		<label for="cw">Color Selector</label>
+		<input id="cw" type="color">
 		<!-- <input type = "button" onclick = "addRows()" id = "rows"> -->	
 	</div>
 	
@@ -27,51 +48,106 @@
 		<table id = "pixelTable">
 			<tbody id ="tableBody">
 				<tr>
-					<td></td>
-					<td></td>
+					<td id="1,1" onmouseover="paint(event)" onclick="clickAndHover(event)"></td> <!-- cells within the row -->
+			<td id="1,2" onmouseover="paint(event)" onclick="clickAndHover(event)"></td>
 				</tr>
 				<tr>
-					<td></td>
-					<td></td> 
+					<td id="2,1" onmouseover="paint(event)" onclick="clickAndHover(event)"></td>
+			<td id="2,2" onmouseover="paint(event)" onclick="clickAndHover(event)"></td> 
 				</tr>
 			</tbody>
 			
 		</table>
+
+	<p>Note: Please press "Clear" once before pressing "Fill Uncolored"</p>
 	</div>
 	<script>
+		let colCount = 0;
+
 		//addRows
 		function addRows(){
 			//add rows using "Add Rows Button"
-
+			//Counter for rows
+			let rowCount = 0;
 			//retrieve Table Id
 			let table = document.getElementById("tableBody");
 			//create a new element for the row
 			let rows = document.createElement("tr");
 			//create new td
 			let col = document.createElement("td");
+
+			//for every row appended, increment rowCount
 			rows.appendChild(col);
 			//add new row to the table
 			table.appendChild(rows);
+			
+			//for every row added, increment colCount 
+			for (let row in rows){
+				colCount++;
+			}
+
 
 		}
 		//add columns
-			//make a loop: for every col added, add the same number of rows variable that keeps track of column, increment columun count 
-			//when you make a row, you go up to the colcount 
+		// 	make a loop: 
+		//variable that keeps track of column, increment columun count 
 
+		function addColumns(){
+			let colAdded = 0;
 
-		// function addColumns(){
-		// 	let colAdded = 0;
+			let table = document.getElementById("tableBody");
 
-		// 	let table = document.getElementById("tableBody");
+			let columns = document.createElement("td")
+			
+			//for every col added, add the same number of rows. What keeps tracks of the number of rows added?
 
-		// 	let columns = document.createElement("td")
-		// 	for (columns in table){
-		// 		if()
-		// 		table.appendChild(rows);
-		// 	}
+			for (let i = 0; i<colCount;i++){
+				addRows();
+				colAdded++;
+			}
 
-		// 	colAdded++;
-		// }
+			
+		}
+
+		//Paint Feature Functions
+		function paint(event) {
+			let x = document.getElementById(event.target.id);
+			let colorPicker = document.getElementById("cw").value;
+			x.addEventListener("click", function(event){x.style.backgroundColor=colorPicker});
+			console.log(colorPicker);
+		}
+		function fillPaint() {
+			let colorPicker = document.getElementById("cw").value;
+			let x = Array.from(document.getElementsByTagName("td")); //can't do table because cells bg color overwrites.
+			//getElementByTagName creates an HTML Collection, an array-like object, but not an array
+			//Array.from changes the HTML Collection into an array
+			x.forEach(function(element){element.style.backgroundColor= colorPicker});
+			//Don't do the for loop below because it might also bring up other properties that you don't want with the HTML Collection
+			// for(let i=0; i<x.length; i++) {
+			// 	x[i].style.backgroundColor = colorPicker;
+			// 	console.log(x);
+			// }
+		}
+		function fillUncolored() {
+			let colorPicker = document.getElementById("cw").value;
+			let x = Array.from(document.getElementsByTagName("td"));
+			x.forEach(function(element){
+				if(element.style.backgroundColor === "white") {
+					element.style.backgroundColor= colorPicker;
+				}
+				console.log(element);
+			});
+		}
+		function fillWhite() {
+			let x = Array.from(document.getElementsByTagName("td"));
+			x.forEach(function(element){element.style.backgroundColor= "white";});
+		}
+		function clickAndHover(event) {
+			let colorPicker = document.getElementById("cw").value;
+			let x = document.getElementById(event.target.id);
+			x.addEventListener("hover", function(event){x.style.backgroundColor=colorPicker});
+		}
+
 			// //add rows from input 
 			// //create new row
 			// let rows = document.createElement("tr")
