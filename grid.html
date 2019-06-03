@@ -27,40 +27,6 @@
 			background-color: "white";
 		}*/
 	</style>
-</head>
-<body>
-	<div align="center">
-
-		<button onclick="addRows()"> Add Row </button>
-		<button onclick="addColumns()">Add Column</button>
-
-		<button onclick="fillPaint()">Fill All</button>
-		<button onclick="fillUncolored()">Fill Uncolored</button>
-		<button onclick="fillWhite()">Clear</button>
-		<button onclick="clickAndHover()">Click and Hold</button>
-
-		<label for="cw">Color Selector</label>
-		<input id="cw" type="color">
-		<!-- <input type = "button" onclick = "addRows()" id = "rows"> -->	
-	</div>
-	
-	<div align ="center">
-		<table id = "pixelTable">
-			<tbody id ="tableBody">
-				<tr>
-					<td id="1,1" onmouseover="paint(event)" onclick="clickAndHover(event)"></td> <!-- cells within the row -->
-			<td id="1,2" onmouseover="paint(event)" onclick="clickAndHover(event)"></td>
-				</tr>
-				<tr>
-					<td id="2,1" onmouseover="paint(event)" onclick="clickAndHover(event)"></td>
-			<td id="2,2" onmouseover="paint(event)" onclick="clickAndHover(event)"></td> 
-				</tr>
-			</tbody>
-			
-		</table>
-
-	<p>Note: Please press "Clear" once before pressing "Fill Uncolored"</p>
-	</div>
 	<script>
 		let colCount = 0;
 
@@ -83,6 +49,8 @@
 			
 			//for every row added, increment colCount 
 			for (let row in rows){
+				rowCount++;
+				console.log(rowCount);
 				colCount++;
 			}
 
@@ -107,6 +75,19 @@
 			}
 
 			
+		}
+
+		// //remove rows
+		function removeRows(td) {
+			
+			let removeRow = document.getElementById("td");
+			removeRow.tr.removeChild(removeRow);
+		}
+
+		//remove columns
+		function removeCols(elementId) {
+			let remove = document.getElementById("td");
+			remove.tableBody.removeChild(columns);
 		}
 
 		//Paint Feature Functions
@@ -164,5 +145,41 @@
 			// 	getId.insertRow()=addRows};
 		//document.getElementById(“myId”).addEventListener(“click”, function(event){
 	</script>
+</head>
+<body>
+	<div align="center">
+
+		<button onclick="addRows()"> Add Row </button>
+		<button onclick="removeRows(this)"> Remove Row </button>
+
+		<button onclick="addColumns()">Add Column</button>
+
+		<button onclick="fillPaint()">Fill All</button>
+		<button onclick="fillUncolored()">Fill Uncolored</button>
+		<button onclick="fillWhite()">Clear</button>
+		<button onclick="clickAndHover()">Click and Hold</button>
+
+		<label for="cw">Color Selector</label>
+		<input id="cw" type="color">
+		<!-- <input type = "button" onclick = "addRows()" id = "rows"> -->	
+	</div>
+	
+	<div align ="center">
+		<table id = "pixelTable">
+			<tbody id ="tableBody">
+				<tr>
+					<td id="1,1" onmouseover="paint(event)" onclick="clickAndHover(event)"></td> <!-- cells within the row -->
+			<td id="1,2" onmouseover="paint(event)" onclick="clickAndHover(event)"></td>
+				</tr>
+				<tr>
+					<td id="2,1" onmouseover="paint(event)" onclick="clickAndHover(event)"></td>
+			<td id="2,2" onmouseover="paint(event)" onclick="clickAndHover(event)"></td> 
+				</tr>
+			</tbody>
+			
+		</table>
+
+	<p>Note: Please press "Clear" once before pressing "Fill Uncolored"</p>
+	</div>
 </body>
 </html>
